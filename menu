@@ -15,9 +15,10 @@ addRecord() {
 # Print is used to read contents of input file. 
 print() {
 	IFS=":"
+	echo -e "Name\t\tAddress\t\tPhone\t\tEmail"
 	while read name address phone email;
 	do
-		echo $name 	$address 	$phone 		$email
+		echo -e "$name\t$address\t$phone\t$email"
 	done <database.txt
 }
 
@@ -107,8 +108,7 @@ do
    esac
 done 
 }
-touch database.txt
-echo "Name:Address:Phone:Email" >> database.txt
+touch database.txt::
 answer=1
 while [ $answer -eq 1 ] 
 do 
