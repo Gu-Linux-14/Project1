@@ -1,4 +1,18 @@
 #!/bin/bash
+
+# Function to add record to text file
+addRecord() {
+	echo "Please fill out the following fields of information:"
+	echo "NOTE: Do not use colons(:) in any of the data entries"
+	read -p 'Name: ' userName
+	read -p 'Address: ' userAddress
+	read -p 'Phone: ' userPhone
+	read -p 'Email: ' userEmail
+
+	echo $userName:$userAddress:$userPhone:$userEmail >> database.txt
+}
+
+# Interative menu 
 menu(){
 echo "Welcome to my contact database, please select in the following menu:"
 echo "(a) Find a record"
@@ -17,6 +31,7 @@ do
          break ;;
       [bB])
          #call Add new record function
+         addRecord
          break ;;
       [cC])
          #call Update record function
