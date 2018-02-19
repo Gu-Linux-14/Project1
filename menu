@@ -47,6 +47,8 @@ do
    esac
 done 
 }
+touch database.txt
+echo "Name:Address:Phone:Email" >> database.txt
 answer=1
 while [ $answer -eq 1 ] 
 do 
