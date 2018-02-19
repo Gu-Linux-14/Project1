@@ -17,7 +17,7 @@ print() {
 	IFS=":"
 	while read name address phone email;
 	do
-		echo $name $address $phone $email
+		echo $name 	$address 	$phone 		$email
 	done <database.txt
 }
 
