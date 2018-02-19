@@ -13,7 +13,7 @@
 addRecord() {
 	echo "Please fill out the following fields of information:"
 	echo "NOTE: Do not use colons(:) in any of the data entries"
-	read -p 'Name: ' userName:
+	read -p 'Name: ' userName
 	read -p 'Address: ' userAddress
 	read -p 'Phone: ' userPhone
 	read -p 'Email: ' userEmail
