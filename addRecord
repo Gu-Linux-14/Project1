@@ -1,0 +1,22 @@
+#!/bin/bash
+# Add function
+# Main is used to read contents of input file. IGNORE, used for testing purposes
+#main() {
+#	IFS=":"
+#	while read name address phone email;
+#	do
+#		echo $name $address $phone $email
+#	done <database.txt
+#}
+
+# Function to add record to text file
+addRecord() {
+	echo "Please enter the following: "
+	read -p 'Name: ' userName
+	read -p 'Address: ' userAddress
+	read -p 'Phone: ' userPhone
+	read -p 'Email: ' userEmail
+
+	echo $userName:$userAddress:$userPhone:$userEmail >> database.txt
+}
+addRecord
