@@ -81,7 +81,8 @@ do
    read input
    case $input in 
       [aA])
-         #call find record function 
+         #call find record function
+	 find
          break ;;
       [bB])
          #call Add new record function
