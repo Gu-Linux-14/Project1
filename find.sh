@@ -10,6 +10,7 @@ RECORD=$(grep -i $input $DATABASE)
 for line in "$RECORD"
 do
 	if [ $? == 1 ]; #a '1' indicates that no matches were found
+	then
 		echo "Could not find the requested record"
 	else
 		echo "Found the requested record: $line"
