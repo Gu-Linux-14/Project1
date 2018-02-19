@@ -1,0 +1,52 @@
+#!/bin/bash
+menu(){
+echo "Welcome to my contact database, please select in the following menu:"
+echo "(a) Find a record"
+echo "(b) Add a new record"
+echo "(c) Update a record"
+echo "(d) Remove a record"
+echo "(e) Quit"
+echo "> Selection is:"
+
+while :
+do 
+   read input
+   case $input in 
+      [aA])
+         #call find record function 
+         break ;;
+      [bB])
+         #call Add new record function
+         break ;;
+      [cC])
+         #call Update record function
+         break ;;
+      [dD])
+         #call Remove record function
+         break ;;
+      [eE])
+         echo "Thank you! Goodbye"
+         exit ;; 
+      *)
+         echo "Sorry that isn't an option, select again.";;
+   esac
+done 
+}
+answer=1
+while [ $answer -eq 1 ] 
+do 
+   menu
+   echo "Would you like to select again(y/n)?"
+   while :
+   do   
+      read response
+      case $response in
+         [yY]) answer=1 
+            break ;;
+         [nN]) answer=0 
+            break ;;
+         *) echo "Invalid response please enter again."
+      esac
+   done
+done
+echo "Thank you! Goodbye"
