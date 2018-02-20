@@ -44,12 +44,14 @@ done
 
 # Function updates record user
 update(){
-read -p "Please enter the first and last name on the file you wish to change: " firstName
-grep  "^$firstName" ./database.txt
-lnNmbr="grep -c \"^$firstName\" ./database.txt "
-if test "eval $lnNmbr">1
+read -p "Please enter the first and last name on the file you wish to update: " firstName
+grep  "^$firstName" ./dataBase.txt
+foo="grep -c \"^$firstName\" ./dataBase.txt"
+lnNmbr=$(eval $foo)
+echo "There is/are $lnNmbr matching files." #"eval $(lnNmbr)"
+if [ $lnNmbr -gt 1 ]
 	then touch dataTemp
-	grep "^$firstName" ./database.txt > ./dataTemp
+	grep "^$firstName" ./dataBase.txt > ./dataTemp
 	read -p "Input the line number of the: " lineNumber
 	holder="head -n "$lineNumber" ./dataTemp | tail -n "\+$lineNumber" " 
 	#eval $holder > ./dataTemp
