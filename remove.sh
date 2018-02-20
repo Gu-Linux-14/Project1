@@ -22,7 +22,7 @@ then   #0 means command worked and found the record from the user input
 			if [ "$answer" == "y" ] || [ "$answer" == "Y" ];
 			then
 				grep -v "$RECORDSTRING" $DATABASE > junkfile.txt && mv junkfile.txt $DATABASE
-				echo "delted all records"
+				echo "delted all records" #grep creates temp junkfile.txt file and removes the selected record
 	 		else
 	 		echo "Duplicate variable, search a different field" 
 	 		fi
