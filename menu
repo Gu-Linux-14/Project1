@@ -44,36 +44,43 @@ done
 
 # Function updates record user
 update(){
-read -p "Please enter the first and last name on the file you wish to update: " firstName
-grep  "^$firstName" ./dataBase.txt
-foo="grep -c \"^$firstName\" ./dataBase.txt"
-lnNmbr=$(eval $foo)
-echo "There is/are $lnNmbr matching files." #"eval $(lnNmbr)"
-if [ $lnNmbr -gt 1 ]
-	then touch dataTemp
-	grep "^$firstName" ./dataBase.txt > ./dataTemp
-	read -p "Input the line number of the: " lineNumber
-	holder="head -n "$lineNumber" ./dataTemp | tail -n "\+$lineNumber" " 
-	#eval $holder > ./dataTemp
-	firstName=$(eval $holder)
-	echo "$firstName"
-	rm dataTemp
+read -p "Please enter the first and last name on the file you wish to change: " firstName
+lnNmbr="grep -c \"^$firstName\" ./database.txt "
+grep "^$firstName" ./database.txt > ./dataTemp
+
+counter=1
+IFS=":"
+echo -e "Ct\tName\t\tAddress\t\tPhone\t\tEmail"
+while read name address phone email;
+do
+echo -e "$counter\t$name\t$address\t$phone\t$email"
+counter=$((counter+1))
+done <datatemp
+
+if test "eval $lnNmbr">1
+then touch dataTemp
+read -p "Input the line number of the: " lineNumber
+holder="head -n "$lineNumber" ./dataTemp | tail -n "\+$lineNumber" "
+firstName=$(eval $holder)
+#echo "$firstName"
+rm dataTemp
 
 fi
 
-read -p "Is this the file you wish to update?(y/n)" data
-if test "$data" = "y" 
-	then grep -v "^$firstName" ./database.txt > ./dataBaseHolder
-	read -p "Enter first and last name: " newName
-	read -p "Enter address: " newAdd
-	read -p "Enter phone: " newPhone
-	read -p "Enter email: " newEmail
-	echo "$newName:$newAdd:$newPhone:$newEmail" >> ./dataBaseHolder
-	mv ./dataBaseHolder ./database.txt
-	echo "DataBase"
-	print
+read -p "Are you ready to update data?(y/n)" data
+if test "$data" = "y"
+then grep -v "^$firstName" ./database.txt > ./dataBaseHolder
+echo "Note do not use colon ':' in entries."
+read -p "Enter first and last name: " newName
+read -p "Enter address: " newAdd
+read -p "Enter phone: " newPhone
+read -p "Enter email: " newEmail
+echo "$newName:$newAdd:$newPhone:$newEmail" >> ./dataBaseHolder
+mv ./dataBaseHolder ./database.txt
+
 else
-	upDate
+echo "Please start over."
+upDate
 fi
 
 }
