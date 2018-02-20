@@ -44,25 +44,36 @@ done
 
 # Function updates record user
 update(){
-read -p "Please enter the first and last name on the file you wish to remove: " firstName
-grep  "^$firstName" ./dataBase.txt
-lnNmbr="grep -c \"^$firstName\" ./dataBase.txt "
-eval $lnNmbr
-read -p "Is this the file you wish to update?" data
-if test "$data" = "y" 
-	then grep -v "^$firstName" ./dataBase.txt > ./dataBaseHolder
-	read -p "Enter new first and last name: " newName
-	read -p "Enter new address: " newAdd
-	read -p "Enter new phone: " newPhone
-	read -p "Enter new email: " newEmail
-	echo "$newName:$newAdd:$newPhone:$newEmail" >> ./dataBaseHolder
-	mv ./dataBaseHolder ./dataBase.txt
-	echo "working"
-else
-	echo "trying"
+read -p "Please enter the first and last name on the file you wish to change: " firstName
+grep  "^$firstName" ./database.txt
+lnNmbr="grep -c \"^$firstName\" ./database.txt "
+if test "eval $lnNmbr">1
+	then touch dataTemp
+	grep "^$firstName" ./database.txt > ./dataTemp
+	read -p "Input the line number of the: " lineNumber
+	holder="head -n "$lineNumber" ./dataTemp | tail -n "\+$lineNumber" " 
+	#eval $holder > ./dataTemp
+	firstName=$(eval $holder)
+	echo "$firstName"
+	rm dataTemp
+
 fi
-echo "DataBase"
-cat ./dataBase.txt
+
+read -p "Is this the file you wish to update?(y/n)" data
+if test "$data" = "y" 
+	then grep -v "^$firstName" ./database.txt > ./dataBaseHolder
+	read -p "Enter first and last name: " newName
+	read -p "Enter address: " newAdd
+	read -p "Enter phone: " newPhone
+	read -p "Enter email: " newEmail
+	echo "$newName:$newAdd:$newPhone:$newEmail" >> ./dataBaseHolder
+	mv ./dataBaseHolder ./database.txt
+	echo "DataBase"
+	print
+else
+	upDate
+fi
+
 }
 
 
