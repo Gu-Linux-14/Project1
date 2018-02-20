@@ -45,26 +45,26 @@ done
 # Function updates record user
 update(){
 read -p "Please enter the first and last name on the file you wish to change: " firstName
-lnNmbr="grep -c \"^$firstName\" ./database.txt "
+lnNmbr=$(grep -c "^$firstName" ./database.txt)
 grep "^$firstName" ./database.txt > ./dataTemp
 
 counter=1
 IFS=":"
-echo -e "Ct\tName\t\tAddress\t\tPhone\t\tEmail"
+echo "Ct\tName\t\tAddress\t\tPhone\t\tEmail"
 while read name address phone email;
 	do
-	echo -e "$counter\t$name\t$address\t$phone\t$email"
+	echo "$counter\t$name\t$address\t$phone\t$email"
 	counter=$((counter+1))
-done <datatemp
+done <dataTemp
 
-if test "eval $lnNmbr" -gt 1
-	then touch dataTemp
-	read -p "Input the line number of the: " lineNumber
+if [ $lnNmbr -ge 1 ]
+	then 
+	touch dataTemp
+	read -p "Input the line number of the data you wish to update: " lineNumber
 	holder="head -n "$lineNumber" ./dataTemp | tail -n "\+$lineNumber" "
 	firstName=$(eval $holder)
 	rm dataTemp
-elif test "eval $lnNmbr" -lt 1
-	then 
+else
 	echo "We were not able to locate your record please check database to ensure it exist."
 fi
 
