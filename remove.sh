@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 Record() {
 DATABASE="database.txt" 
 
@@ -21,16 +20,17 @@ then   #0 means command worked and found the record from the user input
 		read answer 
 			if [ "$answer" == "y" ] || [ "$answer" == "Y" ];
 			then
-				grep -v "$RECORDSTRING" $DATABASE > junkfile.txt && mv junkfile.txt $DATABASE
-				echo "delted all records" #grep creates temp junkfile.txt file and removes the selected record
+				grep -v "$RECORDSTRING" $DATABASE > junkfile.txt 
+				mv junkfile.txt $DATABASE
+				echo "delted all records"		
 	 		else
 	 		echo "Duplicate variable, search a different field" 
 	 		fi
-	else 
-	echo "Just one string"	
+	else 	
 	echo "Record Exists- $RECORDSTRING" 
 	echo "Deleting the line from the database... "
-	grep -v "$RECORDSTRING" $DATABASE > junkfile.txt && mv junkfile.txt $DATABASE 
+	grep -v "$RECORDSTRING" $DATABASE > junkfile.txt 
+	mv junkfile.txt $DATABASE 
 	fi
 else 
 echo "the record does not exist"
@@ -38,7 +38,6 @@ fi
 
 }
 
-#invoke the record function 
 Record  
 
 
