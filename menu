@@ -52,37 +52,35 @@ counter=1
 IFS=":"
 echo -e "Ct\tName\t\tAddress\t\tPhone\t\tEmail"
 while read name address phone email;
-do
-echo -e "$counter\t$name\t$address\t$phone\t$email"
-counter=$((counter+1))
+	do
+	echo -e "$counter\t$name\t$address\t$phone\t$email"
+	counter=$((counter+1))
 done <datatemp
 
 if test "eval $lnNmbr" -gt 1
-then touch dataTemp
-read -p "Input the line number of the: " lineNumber
-holder="head -n "$lineNumber" ./dataTemp | tail -n "\+$lineNumber" "
-firstName=$(eval $holder)
-#echo "$firstName"
-rm dataTemp
+	then touch dataTemp
+	read -p "Input the line number of the: " lineNumber
+	holder="head -n "$lineNumber" ./dataTemp | tail -n "\+$lineNumber" "
+	firstName=$(eval $holder)
+	rm dataTemp
 elif test "eval $lnNmbr" -lt 1
-then 
-echo "We were not able to locate your record please check database to ensure it exist."
+	then 
+	echo "We were not able to locate your record please check database to ensure it exist."
 fi
 
 read -p "Are you ready to update data?(y/n)" data
-if test "$data" = "y"
-then grep -v "^$firstName" ./database.txt > ./dataBaseHolder
-echo "Note do not use colon ':' in entries."
-read -p "Enter first and last name: " newName
-read -p "Enter address: " newAdd
-read -p "Enter phone: " newPhone
-read -p "Enter email: " newEmail
-echo "$newName:$newAdd:$newPhone:$newEmail" >> ./dataBaseHolder
-mv ./dataBaseHolder ./database.txt
-
+if [ "$data" = "y" ] || [ "$data" = "Y" ]
+	then grep -v "^$firstName" ./database.txt > ./dataBaseHolder
+	echo "Note do not use colon ':' in entries."
+	read -p "Enter first and last name: " newName
+	read -p "Enter address: " newAdd
+	read -p "Enter phone: " newPhone
+	read -p "Enter email: " newEmail
+	echo "$newName:$newAdd:$newPhone:$newEmail" >> ./dataBaseHolder
+	mv ./dataBaseHolder ./database.txt
 else
-echo "Please start over."
-upDate
+	echo "Please start over."
+	upDate
 fi
 
 }
