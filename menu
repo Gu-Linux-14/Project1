@@ -66,6 +66,7 @@ if [ $lnNmbr -ge 1 ]
 	rm dataTemp
 else
 	echo "We were not able to locate your record please check database to ensure it exist."
+	return 0
 fi
 
 read -p "Are you ready to update data?(y/n)" data
